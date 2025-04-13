@@ -18,8 +18,8 @@ const SearchBar = ({ placeholder, onPress }: Props) => {
       />
 
       <TextInput
-        onPress={() => {}}
-        placeholder="Search"
+        onPress={onPress}
+        placeholder={placeholder}
         value=""
         onChangeText={() => {}}
         placeholderTextColor="#ab8bff"
