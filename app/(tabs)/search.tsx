@@ -9,19 +9,19 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, FlatList, ActivityIndicator } from "react-native";
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
-    data: movies,
+    data: movies = [],
     loading,
     error,
-  } = useFetch(
-    () =>
-      fetchMovies({
-        query: searchQuery,
-      }),
-    false
-  );
+    refetch: loadMovies,
+    reset,
+  } = useFetch(() => fetchMovies({ query: searchQuery }), false);
+
+  const handleSearch = (text: string) => {
+    setSearchQuery(text);
+  };
 
   return (
     <View className="flex-1 bg-primary">
@@ -52,7 +52,7 @@ const Search = () => {
               <SearchBar
                 placeholder="Search movies..."
                 value={searchQuery}
-                onChangeText={(text: string) => setSearchQuery()}
+                onChangeText={handleSearch}
               />
             </View>
 
